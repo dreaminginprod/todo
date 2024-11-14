@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.home.todo.usecases'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    //maybe in future will require common
+    implementation project(":domain")
+    //not consider
+    implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+}

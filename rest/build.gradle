@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.home.todo.rest'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(project(":domain"))
+    implementation(project(":usecases"))
+
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.5'
+}
