@@ -19,7 +19,8 @@ dependencies {
     implementation project(':domain')
     implementation project(':usecases')
 
+    runtimeOnly 'com.h2database:h2'
     implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:3.3.5'
 }
