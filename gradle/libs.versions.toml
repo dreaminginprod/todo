@@ -25,3 +25,4 @@ spring-dependency-managment = { id = 'io.spring.dependency-management', version.
 
 
 [bundles]
+# you can combine mulitple libs like [lib1, lib2, lib3] example jjwt usually requires 3 libs with the same version
