@@ -1,0 +1,27 @@
+# gradle read this file by default also we can create this file in custom location, but we should explicitly specify in settings
+
+[versions]
+#plugins versions
+springDependencyManagment = '1.1.6'
+
+
+#libs versions
+springBootStarter = "3.3.5"
+injectApi = '2.0.1'
+jsr305 = '3.0.2'
+h2 = '2.2.224'
+
+[libraries]
+h2 = { module = 'com.h2database:h2', version.ref = 'h2' }
+inject-api = { module = 'jakarta.inject:jakarta.inject-api', version.ref = 'injectApi' }
+jsr305 = { module = 'com.google.code.findbugs:jsr305', version.ref = 'jsr305' }
+spring-boot-starter-data-jdbc = { module = 'org.springframework.boot:spring-boot-starter-data-jdbc', version.ref = 'springBootStarter' }
+spring-boot-starter-web = { module = 'org.springframework.boot:spring-boot-starter-web', version.ref = 'springBootStarter' }
+
+
+[plugins]
+spring-boot = { id = 'org.springframework.boot', version.ref = 'springBootStarter' }
+spring-dependency-managment = { id = 'io.spring.dependency-management', version.ref = 'springDependencyManagment' }
+
+
+[bundles]

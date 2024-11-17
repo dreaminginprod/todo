@@ -15,11 +15,9 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
-    //maybe in future will require common
     implementation project(":domain")
-    //not consider
-    implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
-    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
+    implementation libs.inject.api
+    implementation libs.jsr305
 }
