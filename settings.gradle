@@ -3,5 +3,6 @@ rootProject.name = 'todo'
 include(':domain')
 include(':usecases')
 include(':rest')
+include(':wrapper')
 include(':persistence')
 include(':common:types')

@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.home.todo.wrapper'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation libs.jsr305
+    implementation libs.spring.context
+    implementation 'org.sqids:sqids:0.1.0' //first approach id (encode)-> mapped value (decode)-> id
+//    implementation("com.github.f4b6a3:uuid-creator:6.0.0") second approach
+}

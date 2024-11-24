@@ -2,6 +2,7 @@ package org.home.todo.persistence;
 
 import org.home.todo.domain.TodoItem;
 import org.home.todo.domain.TodoItemId;
+import org.home.todo.usecases.dto.NewItem;
 import org.springframework.data.annotation.Id;
 
 import javax.annotation.Nullable;
@@ -16,16 +17,16 @@ record TodoLine(
         @Nullable LocalDateTime finishedBy
 ) {
 
-    public static TodoLine from(TodoItem item) {
+    static TodoLine from(TodoItem item) {
         return new TodoLine(
-                TodoItem.getId(item.id()),
-                item.item(),
+                TodoItemId.from(item),
+                item.text(),
                 item.created(),
                 item.finishedBy()
         );
     }
 
-    public static List<TodoItem> to(Iterable<TodoLine> items) {
+    static List<TodoItem> to(Iterable<TodoLine> items) {
         final List<TodoItem> todoItems = new ArrayList<>();
 
         for (TodoLine item : items) {
@@ -34,10 +35,19 @@ record TodoLine(
         return todoItems;
     }
 
+    public static TodoLine from(NewItem newItem) {
+        return new TodoLine(
+                null,
+                newItem.text(),
+                LocalDateTime.now(),
+                null
+        );
+    }
+
     TodoItem to() {
         return new TodoItem(
                 TodoItemId.from(id()),
-                item,
+                item(),
                 created(),
                 finishedBy()
         );

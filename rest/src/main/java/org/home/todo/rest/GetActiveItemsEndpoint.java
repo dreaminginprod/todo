@@ -1,38 +1,29 @@
 package org.home.todo.rest;
 
-import org.home.todo.domain.TodoItem;
 import org.home.todo.usecases.GetActiveItems;
+import org.home.todo.wrapper.IdsMappingProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 class GetActiveItemsEndpoint {
 
     private final GetActiveItems getAllItemsUseCase;
+    private final IdsMappingProvider idsMappingProvider;
 
-    GetActiveItemsEndpoint(GetActiveItems getAllItemsUseCase) {
+    GetActiveItemsEndpoint(GetActiveItems getAllItemsUseCase, IdsMappingProvider idsMappingProvider) {
         this.getAllItemsUseCase = getAllItemsUseCase;
+        this.idsMappingProvider = idsMappingProvider;
     }
 
-    @GetMapping("v1/api/items")
-    ResponseEntity<List<ItemWebModel>> getAll() {
+    @GetMapping(ItemsEndpointHelper.V_1_API_ITEMS)
+    ResponseEntity<List<ItemResponseWebModel>> getAll() {
         final var items = getAllItemsUseCase.invoke()
-                .map(ItemWebModel::from)
+                .map(item -> ItemResponseWebModel.from(item, idsMappingProvider::encode))
                 .toList();
         return ResponseEntity.ok(items);
-    }
-
-    private record ItemWebModel(
-            int id,
-            String item
-    ) {
-        private static ItemWebModel from(TodoItem todoItem) {
-            //the same as previous.
-            return new ItemWebModel(Objects.requireNonNull(todoItem.id()).value(), todoItem.item());
-        }
     }
 }

@@ -1,9 +1,9 @@
 package org.home.todo.usecases.scenarios;
 
 import jakarta.inject.Named;
-import org.home.todo.domain.NewItem;
 import org.home.todo.domain.TodoItem;
 import org.home.todo.usecases.AddItem;
+import org.home.todo.usecases.dto.NewItem;
 import org.home.todo.usecases.outports.PersistNewItemOutPort;
 
 @Named
@@ -17,7 +17,6 @@ class AddItemUseCase implements AddItem {
 
     @Override
     public TodoItem invoke(NewItem newItem) {
-        var item = TodoItem.from(newItem.text());
-        return persistNewItemOutPort.persist(item);
+        return persistNewItemOutPort.persist(newItem);
     }
 }

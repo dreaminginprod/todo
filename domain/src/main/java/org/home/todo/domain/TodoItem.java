@@ -1,23 +1,22 @@
 package org.home.todo.domain;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public record TodoItem(
-        @Nullable TodoItemId id, // demo
-        String item, // didn't use wrapper (Value Object)
+        TodoItemId id,
+        String text,
         LocalDateTime created,
-        @Nullable LocalDateTime finishedBy// ?
+        @Nullable LocalDateTime finishedBy
 ) {
 
-    public static TodoItem from(String item) {
-        return new TodoItem(null, item, LocalDateTime.now(), null);
-    }
-
-    @CheckForNull
-    public static Integer getId(TodoItemId id) {
-        return Objects.nonNull(id) ? id.value() : null;
+    public TodoItem updateText(String newText) {
+        return new TodoItem(
+                id(),
+                newText,
+                created(),
+                finishedBy()
+        );
     }
 }
